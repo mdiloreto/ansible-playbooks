@@ -1,0 +1,18 @@
+- name: Open WinRM ports in Windows Firewall
+  hosts: windows
+  gather_facts: false
+
+  vars:
+    ansible_user: "admin_user01"
+    ansible_password: "MadsBlog_2023!!"
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
+
+  tasks:
+    - name: Disable Domain firewall
+      win_firewall:
+        state: disabled
+        profiles:
+        - Private
+

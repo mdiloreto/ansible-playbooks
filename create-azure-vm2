@@ -1,0 +1,18 @@
+- hosts: localhost
+  connection: local
+  vars:
+    azure_subscription_id: "{{ lookup('env', 'AZURE_SUBSCRIPTION_ID') }}"
+    azure_client_id: "{{ lookup('env', 'AZURE_CLIENT_ID') }}"
+    azure_secret_id: "{{ lookup('env', 'AZURE_SECRET') }}"
+    azure_tenant_id: "{{ lookup('env', 'AZURE_TENANT') }}"
+  collections:
+    - azure.azcollection
+  tasks:
+    - name: Creating resource group
+      azure_rm_resourcegroup:
+        name: "ansible_rg_playbook"
+        location: "eastus"
+        subscription_id: "{{ azure_subscription_id }}"
+        client_id: "{{ azure_client_id }}"
+        secret: "{{ azure_secret_id }}"
+        tenant: "{{ azure_tenant_id }}"
