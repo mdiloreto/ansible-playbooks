@@ -20,15 +20,3 @@
       ansible.builtin.debug:
         msg: "{{ (os_release.content | b64decode).split('\n') }}"
 
-- name: Gather Windows OS info
-  hosts: windows 
-  gather_facts: false
-  
-  tasks: 
-    - name: Get OS info 
-      ansible.windows.win_command: systeminfo
-      register: windows_os_info
-
-    - name: Show OS info
-      ansible.builtin.debug: 
-        msg: "{{ windows_os_info }}"

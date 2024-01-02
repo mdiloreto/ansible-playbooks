@@ -1,0 +1,11 @@
+---
+- name: Create a new user on Linux hosts
+  hosts: linux  # or your specific group of Linux hosts
+  become: yes  # Use 'become' to become root (sudo)
+  tasks:
+    - name: Ensure the user 'newuser' is present
+      ansible.builtin.user:
+        name: newuser
+        comment: "New User"
+        shell: /bin/bash
+        create_home: yes

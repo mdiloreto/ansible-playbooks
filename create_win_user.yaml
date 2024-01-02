@@ -1,0 +1,20 @@
+---
+- name: Create a new user on Windows hosts
+  hosts: windows  # or your specific group of Windows hosts
+  vars:
+    ansible_user: "admin_user01"
+    ansible_password: "MadsBlog_2023!!"
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
+
+  tasks:
+    - name: Ensure the user 'newuser' is present
+      ansible.windows.win_user:
+        name: ansible-playbook
+        password: SecurePassword123  # Replace with a secure password
+        state: present
+        groups:
+          - Users
+        password_never_expires: yes
+        update_password: on_create

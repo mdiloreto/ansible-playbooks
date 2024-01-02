@@ -1,0 +1,22 @@
+- name: Gather Windows OS info
+  hosts: windows
+  gather_facts: false
+
+  vars:
+    ansible_user: "admin_user01"
+    ansible_password: "MadsBlog_2023!!"
+    ansible_connection: winrm
+    ansible_winrm_transport: ntlm
+    ansible_winrm_server_cert_validation: ignore
+
+
+  tasks:
+    - name: Get OS info
+      ansible.windows.win_command: systeminfo
+      register: windows_os_info
+
+    - name: Show OS info
+      ansible.builtin.debug:
+        msg: "{{ windows_os_info }}"
+
+
